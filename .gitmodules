@@ -1,0 +1,3 @@
+[submodule "laradock-task-manager"]
+	path = laradock-task-manager
+	url = https://github.com/Laradock/laradock.git
