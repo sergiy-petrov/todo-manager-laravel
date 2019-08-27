@@ -65,10 +65,14 @@
                                     <tbody>
                                     @foreach($tasksCreatedByMe as $task)
                                         <tr>
-                                            <td>{{ $task->title }}</td>
+                                            <td>
+                                                <a href="{{ route('tasks.show', $task) }}">
+                                                    {{ $task->title }}
+                                                </a>
+                                            </td>
                                             <td>{{ $task->priority }}</td>
-                                            <td>{{ $task->owner->name }} ({{ $task->owner->email }})</td>
-                                            <td>{{ $task->assignee->name }} ({{ $task->assignee->email }})</td>
+                                            <td>{{ $task->owner_name_and_email }}</td>
+                                            <td>{{ $task->assignee_name_and_email }}</td>
                                             <td>{{ $task->is_completed ? '+' : '-' }}</td>
                                             <td>{{ $task->completed_at }}</td>
                                         </tr>
