@@ -22,30 +22,26 @@
                             <div class="tab-pane active" id="tab_1">
                                 <table class="table table-bordered table-hover">
                                     <thead>
-                                    <tr role="row">
+                                    <tr>
                                         <th>Title</th>
                                         <th>Priority</th>
-                                        <th>Owner</th>
+                                        <th>Creator</th>
                                         <th>Assignee</th>
                                         <th>Completed</th>
                                         <th>Completed Date</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 1.0</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 1.0</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                    </tr>
+                                    @foreach($tasksAssignedToMe as $task)
+                                        <tr>
+                                            <td>{{ $task->title }}</td>
+                                            <td>{{ $task->priority }}</td>
+                                            <td>{{ $task->owner->name }} ({{ $task->owner->email }})</td>
+                                            <td>{{ $task->assignee->name }} ({{ $task->assignee->email }})</td>
+                                            <td>{{ $task->is_completed ? '+' : '-' }}</td>
+                                            <td>{{ $task->completed_at }}</td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -53,23 +49,26 @@
                             <div class="tab-pane" id="tab_2">
                                 <table class="table table-bordered table-hover">
                                     <thead>
-                                    <tr role="row">
+                                    <tr>
                                         <th>Title</th>
                                         <th>Priority</th>
-                                        <th>Owner</th>
+                                        <th>Creator</th>
                                         <th>Assignee</th>
                                         <th>Completed</th>
                                         <th>Completed Date</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 1.0</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                    </tr>
+                                    @foreach($tasksCreatedByMe as $task)
+                                        <tr>
+                                            <td>{{ $task->title }}</td>
+                                            <td>{{ $task->priority }}</td>
+                                            <td>{{ $task->owner->name }} ({{ $task->owner->email }})</td>
+                                            <td>{{ $task->assignee->name }} ({{ $task->assignee->email }})</td>
+                                            <td>{{ $task->is_completed ? '+' : '-' }}</td>
+                                            <td>{{ $task->completed_at }}</td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

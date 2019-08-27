@@ -13,7 +13,19 @@ class TaskController extends Controller
 {
     public function index(): View
     {
-        return \View::make('tasks.index');
+        $userId = \Auth::user()->id;
+
+        $this->data['tasksAssignedToMe'] = Task::with('assignee', 'owner')
+            ->whereAssigneeId($userId)
+            ->orderByDesc('priority')
+            ->get();
+
+        $this->data['tasksCreatedByMe'] = Task::with('assignee', 'owner')
+            ->whereOwnerId($userId)
+            ->orderByDesc('priority')
+            ->get();
+
+        return \View::make('tasks.index', $this->data);
     }
 
     public function create(): View

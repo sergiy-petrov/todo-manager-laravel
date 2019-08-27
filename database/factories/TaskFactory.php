@@ -12,5 +12,6 @@ $factory->define(\App\Task::class, function (Faker $faker) {
         'title' => $faker->word,
         'description' => $faker->words(10, true),
         'priority' => rand(0, 5),
+        'completed_at' => rand(0, 1) ? today()->subSeconds(rand(60, 86400 * 30)) : null,
     ];
 });
