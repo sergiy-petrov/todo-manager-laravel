@@ -11,5 +11,11 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::resource('/tasks', 'TaskController');
+Route::get('/login', 'LoginController@index')->name('login.index');
+Route::post('/login', 'LoginController@login')->name('login');
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::resource('/tasks', 'TaskController');
+
+});
