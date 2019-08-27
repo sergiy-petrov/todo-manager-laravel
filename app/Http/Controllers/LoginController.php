@@ -34,9 +34,7 @@ class LoginController extends Controller
         $email = $request->get('email');
         $password = $request->get('password');
 
-        if ($user = $this->authService->attemptLogin($email, $password)) {
-            \Auth::guard()->login($user);
-
+        if ($this->authService->attemptLogin($email, $password)) {
             return \Redirect::to(route('home'));
         }
 

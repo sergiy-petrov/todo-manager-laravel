@@ -8,15 +8,17 @@ use App\User;
 
 class AuthService
 {
-    public function attemptLogin(string $email, string $password): ?User
+    public function attemptLogin(string $email, string $password): bool
     {
         $user = $this->getUserByEmail($email);
 
         if ($user && \Hash::check($password, $user->password)) {
-            return $user;
+            \Auth::guard()->login($user);
+
+            return true;
         }
 
-        return null;
+        return false;
     }
 
     protected function getUserByEmail(string $email): ?User
