@@ -15,7 +15,7 @@ class Task extends Model
 
     public function assignee(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withDefault();
     }
 
     public function owner(): BelongsTo
@@ -26,5 +26,19 @@ class Task extends Model
     public function getIsCompletedAttribute(): bool
     {
         return ! \is_null($this->completed_at);
+    }
+
+    public function getOwnerNameAndEmailAttribute(): string
+    {
+        return "{$this->owner->name} ({$this->owner->email})";
+    }
+
+    public function getAssigneeNameAndEmailAttribute(): string
+    {
+        if ($this->assignee->exists) {
+            return "{$this->assignee->name} ({$this->assignee->email})";
+        }
+
+        return '';
     }
 }

@@ -40,7 +40,9 @@ class TaskController extends Controller
 
     public function show(Task $task): View
     {
-        //
+        $this->data['task'] = $task;
+
+        return \View::make('tasks.show', $this->data);
     }
 
     public function edit(Task $task): View
