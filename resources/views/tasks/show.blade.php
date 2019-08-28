@@ -10,7 +10,9 @@
             <h3 class="box-title">Task #{{ $task->id }}</h3>
 
             <div class="box-tools">
-                {!! form($deleteForm) !!}
+                @can('delete', $task)
+                    {!! form($deleteForm) !!}
+                @endcan
             </div>
         </div>
 
