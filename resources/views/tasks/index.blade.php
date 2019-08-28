@@ -9,7 +9,9 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Tasks</h3>
+                    <h3 class="box-title">
+                        <a href="{{ route('tasks.index') }}">Tasks</a>
+                    </h3>
 
                     <div class="pull-right">
                         <a href="{{ route('tasks.create') }}" class="btn btn-primary">Add Task</a>
@@ -17,6 +19,40 @@
                 </div>
 
                 <div class="box-body">
+                    <div class="row">
+                        <form method="get" href="{{ route('tasks.index') }}">
+                            <div class="col-sm-3">
+                                <label>Search by name:
+                                    <input type="search" name="search" class="form-control input-sm" value="{{ request('search') }}">
+                                </label>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>
+                                    Priority
+                                    <select name="priority" class="form-control input-sm">
+                                        <option value="">- Any- </option>
+                                        @foreach(range(0, 5) as $priority)
+                                            <option value="{{ $priority }}" {{ $priority == request('priority') ? 'selected' : '' }}>
+                                                {{ $priority }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>Date
+                                    <input type="date" name="date" class="form-control input-sm" value="{{ request('date') }}">
+                                </label>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <input type="submit" class="form-control btn btn-primary" value="Search">
+                            </div>
+                        </form>
+                    </div>
+
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Assigned to me</a></li>
