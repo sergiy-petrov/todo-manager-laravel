@@ -66,16 +66,6 @@ class TaskController extends Controller
         return \View::make('tasks.show', $this->data);
     }
 
-    public function edit(Task $task): View
-    {
-        //
-    }
-
-    public function update(Request $request, Task $task): RedirectResponse
-    {
-        //
-    }
-
     public function destroy(Task $task): RedirectResponse
     {
         $task->delete();
