@@ -13,6 +13,9 @@
 
 Route::get('/login', 'LoginController@index')->name('login.index');
 Route::post('/login', 'LoginController@login')->name('login');
+Route::post('/logout', 'LoginController@logout')->name('logout');
+Route::get('/register', 'RegistrationController@index')->name('registration.index');
+Route::post('/register', 'RegistrationController@register')->name('registration');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/', 'HomeController@index')->name('home');

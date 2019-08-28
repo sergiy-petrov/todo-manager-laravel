@@ -19,7 +19,7 @@ class LoginController extends Controller
 
     public function __construct(AuthService $authService)
     {
-        $this->middleware('guest');
+        $this->middleware('guest')->except('logout');
 
         $this->authService = $authService;
     }
@@ -41,5 +41,12 @@ class LoginController extends Controller
         throw ValidationException::withMessages([
             'email' => [trans('auth.failed')],
         ]);
+    }
+
+    public function logout(): RedirectResponse
+    {
+        $this->authService->logout();
+
+        return \Redirect::to(route('login.index'));
     }
 }
