@@ -17,5 +17,7 @@ Route::post('/login', 'LoginController@login')->name('login');
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('/tasks', 'TaskController');
-
+    Route::post('/tasks/{task}/complete', 'TaskCompleteController@store')
+        ->middleware('can:complete,task')
+        ->name('tasks.complete.store');
 });

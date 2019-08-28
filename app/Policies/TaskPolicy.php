@@ -19,4 +19,13 @@ class TaskPolicy
     {
         return $user->id === $task->owner_id;
     }
+
+    public function complete(User $user, Task $task): bool
+    {
+        if ($user->id === $task->owner_id) {
+            return true;
+        }
+
+        return $user->id !== $task->assignee_id;
+    }
 }

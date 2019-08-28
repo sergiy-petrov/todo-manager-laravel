@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Forms\CompleteTaskForm;
 use App\Forms\DeleteTaskForm;
 use App\Task;
 use Illuminate\Contracts\View\View;
@@ -50,6 +51,10 @@ class TaskController extends Controller
         $this->data['deleteForm'] = $formBuilder->create(DeleteTaskForm::class, [
             'method' => 'DELETE',
             'url' => route('tasks.destroy', $task),
+        ]);
+        $this->data['completeForm'] = $formBuilder->create(CompleteTaskForm::class, [
+            'method' => 'POST',
+            'url' => route('tasks.complete.store', $task),
         ]);
 
         return \View::make('tasks.show', $this->data);

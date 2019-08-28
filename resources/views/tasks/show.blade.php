@@ -9,10 +9,17 @@
         <div class="box-header with-border">
             <h3 class="box-title">Task #{{ $task->id }}</h3>
 
-            <div class="box-tools">
+            <div class="pull-right">
                 @can('delete', $task)
                     {!! form($deleteForm) !!}
                 @endcan
+            </div>
+            <div class="pull-right">
+                @if (! $task->is_completed)
+                    @can('complete', $task)
+                        {!! form($completeForm) !!}
+                    @endcan
+                @endif
             </div>
         </div>
 

@@ -6,13 +6,13 @@ namespace App\Forms;
 
 use Kris\LaravelFormBuilder\Form;
 
-class DeleteTaskForm extends Form
+class CompleteTaskForm extends Form
 {
     public function buildForm(): void
     {
         $this->add('submit', 'submit', [
-            'label' => 'Delete Task',
-            'attr' => ['class' => 'form-control btn btn-danger'],
+            'label' => 'Complete Task',
+            'attr' => ['class' => 'form-control btn btn-success'],
         ]);
     }
 }
