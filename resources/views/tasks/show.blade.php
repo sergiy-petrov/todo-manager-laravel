@@ -8,6 +8,10 @@
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">Task #{{ $task->id }}</h3>
+
+            <div class="box-tools">
+                {!! form($deleteForm) !!}
+            </div>
         </div>
 
         <div class="box-body">

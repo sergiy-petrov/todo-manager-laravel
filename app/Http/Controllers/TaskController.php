@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Forms\DeleteTaskForm;
 use App\Task;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -11,6 +12,11 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Task::class, 'task');
+    }
+
     public function index(): View
     {
         $userId = \Auth::user()->id;
@@ -38,9 +44,13 @@ class TaskController extends Controller
         //
     }
 
-    public function show(Task $task): View
+    public function show(Task $task, \Kris\LaravelFormBuilder\FormBuilder $formBuilder): View
     {
         $this->data['task'] = $task;
+        $this->data['deleteForm'] = $formBuilder->create(DeleteTaskForm::class, [
+            'method' => 'DELETE',
+            'url' => route('tasks.destroy', $task),
+        ]);
 
         return \View::make('tasks.show', $this->data);
     }
@@ -57,6 +67,8 @@ class TaskController extends Controller
 
     public function destroy(Task $task): RedirectResponse
     {
-        //
+        $task->delete();
+
+        return \Redirect::to(route('tasks.index'));
     }
 }
