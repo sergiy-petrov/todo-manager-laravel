@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
 use App\Task;
@@ -10,7 +12,12 @@ class TaskPolicy
 {
     use HandlesAuthorization;
 
-    public function view(User $user, Task $task): bool
+    public function view(): bool
+    {
+        return true;
+    }
+
+    public function create(): bool
     {
         return true;
     }

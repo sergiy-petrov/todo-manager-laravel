@@ -6,10 +6,12 @@ namespace App\Http\Controllers;
 
 use App\Forms\CompleteTaskForm;
 use App\Forms\DeleteTaskForm;
+use App\Http\Requests\StoreTaskRequest;
 use App\Task;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Kris\LaravelFormBuilder\FormBuilder;
 
 class TaskController extends Controller
 {
@@ -35,17 +37,26 @@ class TaskController extends Controller
         return \View::make('tasks.index', $this->data);
     }
 
-    public function create(): View
+    public function create(FormBuilder $formBuilder): View
     {
-        //
+        $this->data['form'] = $formBuilder->create(\App\Forms\CreateTaskForm::class, [
+            'method' => 'POST',
+            'url' => route('tasks.store'),
+        ]);
+
+        return \View::make('tasks.create', $this->data);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreTaskRequest $request): RedirectResponse
     {
-        //
+        $task = Task::create($request->merge([
+            'owner_id' => \Auth::user()->id,
+        ])->all());
+
+        return \Redirect::to(route('tasks.show', $task));
     }
 
-    public function show(Task $task, \Kris\LaravelFormBuilder\FormBuilder $formBuilder): View
+    public function show(Task $task, FormBuilder $formBuilder): View
     {
         $this->data['task'] = $task;
         $this->data['deleteForm'] = $formBuilder->create(DeleteTaskForm::class, [

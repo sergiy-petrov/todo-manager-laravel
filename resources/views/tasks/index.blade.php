@@ -10,6 +10,10 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Tasks</h3>
+
+                    <div class="pull-right">
+                        <a href="{{ route('tasks.create') }}" class="btn btn-primary">Add Task</a>
+                    </div>
                 </div>
 
                 <div class="box-body">

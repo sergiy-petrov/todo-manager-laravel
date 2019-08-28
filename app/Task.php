@@ -9,6 +9,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Task extends Model
 {
+    protected $fillable = [
+        'title',
+        'description',
+        'assignee_id',
+        'owner_id',
+        'priority',
+    ];
+
     protected $casts = [
         'completed_at' => 'datetime',
     ];
