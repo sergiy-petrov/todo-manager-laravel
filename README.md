@@ -37,7 +37,7 @@ replace `MYSQL_VERSION=latest` with `MYSQL_VERSION=5.7`
 
 `docker-compose exec workspace php artisan db:seed`
 
-8 Open localhost and use this credentials to login
+8 Open http://localhost and use this credentials to login
 
 email: admin@todo.loc
 
